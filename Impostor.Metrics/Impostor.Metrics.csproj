@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prometheus.Client" Version="4.4.0" />
+    <PackageReference Include="Prometheus.Client.DependencyInjection" Version="0.4.0" />
+    <PackageReference Include="Prometheus.Client.MetricServer" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Impostor.Api">
+      <HintPath>..\..\Impostor\src\Impostor.Api\bin\Release\netstandard2.1\Impostor.Api.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
