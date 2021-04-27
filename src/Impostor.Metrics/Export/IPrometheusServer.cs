@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Impostor.Metrics.Metrics;
 using Prometheus.Client;
 using Prometheus.Client.MetricServer;
 
@@ -10,7 +11,7 @@ namespace Impostor.Metrics.Export
 {
     public interface IPrometheusServer
     {
-        IMetricFactory Metrics { get; }
+        StatusManager StatusManager { get; }
 
         void Start();
 

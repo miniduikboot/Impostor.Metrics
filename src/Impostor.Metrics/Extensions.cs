@@ -15,5 +15,10 @@ namespace Impostor.Metrics
             collection.AddSingleton<ThreadStatus>();
             return collection;
         }
+
+        public static IServiceCollection AddMetrics(this IServiceCollection collection)
+        {
+            return collection.AddStatusCollectors().AddSingleton<StatusManager>();
+        }
     }
 }

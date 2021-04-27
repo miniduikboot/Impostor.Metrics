@@ -1,24 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Impostor.Metrics.Config;
+using Microsoft.Extensions.Logging;
+using Prometheus.Client;
 
 namespace Impostor.Metrics.Metrics
 {
-    public class CpuStatus
+    public class CpuStatus : IMetricStatus
     {
         private readonly Process _proc = Process.GetCurrentProcess();
 
         public float UsagePercent { get; private set; }
 
-        public CpuStatus(StatusConfiguration configuration)
+        private readonly IGauge<long> _cpuGauge;
+
+        public CpuStatus(IMetricFactory metrics, ILogger<CpuStatus> logger)
         {
-            if (!configuration.EnableCpuStatus) return;
-            Task.Factory.StartNew(Update, TaskCreationOptions.LongRunning);
+            Task.Factory.StartNew(CalculateUsage, TaskCreationOptions.LongRunning);
+
+            this._cpuGauge = metrics.CreateGaugeInt64("cpu_percent", "CPU Usage percent (process only)");
+            logger.LogInformation("Impostor.Metrics: enabled CPU status.");
         }
 
-        private async Task Update()
+        private async Task CalculateUsage()
         {
             while (true)
             {
@@ -35,6 +42,11 @@ namespace Impostor.Metrics.Metrics
                 this.UsagePercent = (float) Math.Round((cpuTime / duration)*100f, 2);
                 this._proc.Refresh();
             }
+        }
+
+        public void Update()
+        {
+            this._cpuGauge.Set((long)this.UsagePercent);
         }
     }
 }

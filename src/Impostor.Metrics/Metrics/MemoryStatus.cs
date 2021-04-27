@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Impostor.Metrics.Config;
+using Microsoft.Extensions.Logging;
+using Prometheus.Client;
 
 namespace Impostor.Metrics.Metrics
 {
-    public class MemoryStatus
+    public class MemoryStatus : IMetricStatus
     {
         private readonly Process _proc;
 
@@ -75,10 +77,43 @@ namespace Impostor.Metrics.Metrics
             }
         }
 
-        public MemoryStatus(StatusConfiguration configuration)
+        private readonly IGauge<long> _privateMemory;
+
+        private readonly IGauge<long> _peakPagedMemory;
+
+        private readonly IGauge<long> _peakWorkingSet;
+
+        private readonly IGauge<long> _peakVirtualMemory;
+
+        private readonly IGauge<long> _workingSet;
+
+        private readonly IGauge<long> _pagedMemory;
+
+        private readonly IGauge<long> _pagedSystemMemory;
+
+        public MemoryStatus(IMetricFactory metrics, ILogger<MemoryStatus> logger)
         {
-            if(!configuration.EnableMemoryStatus) return;
             this._proc = Process.GetCurrentProcess();
+
+            this._privateMemory = metrics.CreateGaugeInt64("memory_bytes", "The Memory Usage");
+            this._peakPagedMemory = metrics.CreateGaugeInt64("peak_paged_memory_bytes", "N/A");
+            this._peakWorkingSet = metrics.CreateGaugeInt64("peak_working_set_bytes", "N/A");
+            this._peakVirtualMemory = metrics.CreateGaugeInt64("peak_virtual_memory_bytes", "N/A");
+            this._workingSet = metrics.CreateGaugeInt64("working_set_bytes", "N/A");
+            this._pagedMemory = metrics.CreateGaugeInt64("paged_memory_bytes", "N/A");
+            this._pagedSystemMemory = metrics.CreateGaugeInt64("paged_system_memory_bytes", "N/A");
+            logger.LogInformation("Impostor.Metrics: enabled memory status.");
+        }
+
+        public void Update()
+        {
+            this._peakPagedMemory.Set(this.PeakPagedMemory);
+            this._peakWorkingSet.Set(this.PeakWorkingSet);
+            this._peakVirtualMemory.Set(this.PeakVirtualMemory);
+            this._workingSet.Set(this.WorkingSet);
+            this._pagedMemory.Set(this.PagedMemorySize);
+            this._pagedSystemMemory.Set(this.PagedSystemMemorySize);
+            this._privateMemory.Set(this.PrivateBytes);
         }
     }
 }

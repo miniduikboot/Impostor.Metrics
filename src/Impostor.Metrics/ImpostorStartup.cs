@@ -18,9 +18,7 @@ namespace Impostor.Metrics
         public void ConfigureServices(IServiceCollection services)
         {
             Configure(services);
-
-            services.AddMetricFactory();
-            services.AddStatusCollectors();
+            services.AddMetricFactory().AddMetrics();
             services.AddSingleton<IPrometheusServer, PrometheusServer>();
         }
 
