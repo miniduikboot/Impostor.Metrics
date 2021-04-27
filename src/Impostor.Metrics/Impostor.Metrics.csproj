@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <Reference Include="Impostor.Api">
-      <HintPath>..\..\Impostor\src\Impostor.Api\bin\Release\netstandard2.1\Impostor.Api.dll</HintPath>
+      <HintPath>..\..\..\Impostor\src\Impostor.Api\bin\Release\netstandard2.1\Impostor.Api.dll</HintPath>
     </Reference>
   </ItemGroup>
 

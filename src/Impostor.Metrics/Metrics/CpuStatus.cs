@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Impostor.Metrics.Config;
 
 namespace Impostor.Metrics.Metrics
 {
@@ -11,8 +12,9 @@ namespace Impostor.Metrics.Metrics
 
         public float UsagePercent { get; private set; }
 
-        public CpuStatus()
+        public CpuStatus(StatusConfiguration configuration)
         {
+            if (!configuration.EnableCpuStatus) return;
             Task.Factory.StartNew(Update, TaskCreationOptions.LongRunning);
         }
 

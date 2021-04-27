@@ -16,8 +16,6 @@ namespace Impostor.Metrics.Metrics
 
         public int ShipGames => _gameManager.Games.Count(game => game?.Options.Map == MapTypes.Airship);
 
-        public int Players => _clientManager.Clients.Count();
-
         public int PlayersWaiting => _clientManager.Clients.Count(c => c.Player?.Game.GameState == GameStates.NotStarted);
 
         public int PlayersInGame => _clientManager.Clients.Count(c => c.Player?.Game.GameState == GameStates.Started);

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Impostor.Metrics.Metrics;
 using Microsoft.Extensions.DependencyInjection;
+using Prometheus.Client.MetricServer;
 
-namespace Impostor.Metrics.Metrics
+namespace Impostor.Metrics
 {
-    static partial class Extensions
+    internal static class Extensions
     {
         public static IServiceCollection AddStatusCollectors(this IServiceCollection collection)
         {
             collection.AddSingleton<CpuStatus>();
+            collection.AddSingleton<MemoryStatus>();
             collection.AddSingleton<EventStatus>();
             collection.AddSingleton<GameStatus>();
             collection.AddSingleton<ThreadStatus>();

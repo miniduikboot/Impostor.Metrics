@@ -3,6 +3,7 @@ using System.Threading;
 using Impostor.Api.Events;
 using Impostor.Api.Events.Player;
 using Impostor.Api.Innersloth;
+using Impostor.Metrics.Config;
 using Microsoft.Extensions.Logging;
 
 namespace Impostor.Metrics.Metrics
@@ -52,8 +53,9 @@ namespace Impostor.Metrics.Metrics
 
         #endregion
 
-        public EventStatus()
+        public EventStatus(StatusConfiguration configuration)
         {
+            if(!configuration.EnableEventStatus) return;
             var tmr = new System.Timers.Timer(1000) {AutoReset = true, Enabled = true};
             tmr.Elapsed += Update;
         }
