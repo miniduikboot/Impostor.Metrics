@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D4F2159A-4EB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impostor.Metrics", "src\Impostor.Metrics\Impostor.Metrics.csproj", "{FC2A6BBB-EC90-4768-9D14-174826A561FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{30FEE3F0-1C9E-4723-BFD6-085A350810C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Impostor.Metrics.Gc", "src\modules\Impostor.Metrics.Gc\Impostor.Metrics.Gc.csproj", "{C544F438-7058-4B7F-88A0-91829821A1E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,18 @@ Global
 		{FC2A6BBB-EC90-4768-9D14-174826A561FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC2A6BBB-EC90-4768-9D14-174826A561FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC2A6BBB-EC90-4768-9D14-174826A561FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C544F438-7058-4B7F-88A0-91829821A1E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C544F438-7058-4B7F-88A0-91829821A1E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C544F438-7058-4B7F-88A0-91829821A1E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C544F438-7058-4B7F-88A0-91829821A1E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FC2A6BBB-EC90-4768-9D14-174826A561FF} = {D4F2159A-4EB2-4CB9-9EAA-D45F11178FE5}
+		{30FEE3F0-1C9E-4723-BFD6-085A350810C0} = {D4F2159A-4EB2-4CB9-9EAA-D45F11178FE5}
+		{C544F438-7058-4B7F-88A0-91829821A1E3} = {30FEE3F0-1C9E-4723-BFD6-085A350810C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C29BBAB7-BFA7-4BD2-BBB7-69DEB08644F1}

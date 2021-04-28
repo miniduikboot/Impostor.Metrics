@@ -42,7 +42,6 @@ namespace Impostor.Metrics.Config
             Trace.Assert(Port!=0, "Port cannot be 0");
 
             Trace.Assert(!string.IsNullOrWhiteSpace(Host), "Host cannot be null or empty.");
-            Trace.Assert(IPAddress.TryParse(Host, out _) || Dns.GetHostAddresses(Host).Length > 0, $"Invalid host interface: \"{Host}\"");
         }
 
     }

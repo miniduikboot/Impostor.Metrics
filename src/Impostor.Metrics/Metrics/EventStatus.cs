@@ -84,7 +84,6 @@ namespace Impostor.Metrics.Metrics
 
         #endregion
 
-
         public EventStatus(IEventManager eventManager, IMetricFactory metrics, ILogger<EventStatus> logger)
         {
             eventManager.RegisterListener(this);

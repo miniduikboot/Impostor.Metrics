@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Impostor.Metrics\Impostor.Metrics.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Impostor.Api">
+      <HintPath>..\..\..\..\Impostor\src\Impostor.Api\bin\Release\netstandard2.1\Impostor.Api.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

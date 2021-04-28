@@ -41,8 +41,6 @@ namespace Impostor.Metrics
 
             this._clock = new System.Timers.Timer(1000) { AutoReset = true };
             this._clock.Elapsed += Update;
-
-            _logger.LogInformation("Impostor.Metrics: created exports.");
         }
 
         public void Start()
