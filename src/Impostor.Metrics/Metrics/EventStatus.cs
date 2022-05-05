@@ -12,6 +12,8 @@ namespace Impostor.Metrics.Metrics
 {
     public class EventStatus : IEventListener, IMetricStatus
     {
+        public ILogger<EventStatus> _logger;
+
         #region Counts
 
         #region Game Over
@@ -30,6 +32,8 @@ namespace Impostor.Metrics.Metrics
 
         public int GameOverByImpostorDisconnect => _overByImpostorDisconnect;
 
+        public int GameOverByCustom => _overByCustom;
+
         private int 
             _overByHumanVote,
             _overByHumanTasks,
@@ -37,7 +41,8 @@ namespace Impostor.Metrics.Metrics
             _overByImpostorKill,
             _overBySabotage,
             _overByImpostorDisconnect,
-            _overByHumanDisconnect;
+            _overByHumanDisconnect,
+            _overByCustom;
 
         #endregion
         
@@ -82,10 +87,13 @@ namespace Impostor.Metrics.Metrics
 
         private readonly IGauge<long> _gameOverImpostorDisconnect;
 
+        private readonly IGauge<long> _gameOverCustom;
+
         #endregion
 
         public EventStatus(IEventManager eventManager, IMetricFactory metrics, ILogger<EventStatus> logger)
         {
+            this._logger = logger;
             eventManager.RegisterListener(this);
             this._messagesPerSecond = metrics.CreateGaugeInt64("chat_rate", "Chat Messages / second");
             this._messagesKbPerSecond =
@@ -105,6 +113,8 @@ namespace Impostor.Metrics.Metrics
                 metrics.CreateGaugeInt64("over_impostor_sabotage", "Game over by sabotage.");
             this._gameOverImpostorDisconnect = metrics.CreateGaugeInt64("over_impostor_disconnect",
                 "Game over by impostors disconnecting.");
+            this._gameOverCustom = metrics.CreateGaugeInt64("over_custom",
+                "Game over for an custom reason.");
             logger.LogInformation("Impostor.Metrics: enabled event status.");
 
             var tmr = new System.Timers.Timer(1000) {AutoReset = true, Enabled = true};
@@ -161,7 +171,9 @@ namespace Impostor.Metrics.Metrics
                     Interlocked.Increment(ref _overByHumanDisconnect);
                     return;
                 default:
-                    throw new ArgumentOutOfRangeException("!");
+                    this._logger.LogWarning("Unknown GameOverReason: {reason}", (byte)evt.GameOverReason);
+                    Interlocked.Increment(ref _overByCustom);
+                    return;
             }
         }
 
