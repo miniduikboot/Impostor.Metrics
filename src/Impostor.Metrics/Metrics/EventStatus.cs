@@ -190,6 +190,7 @@ namespace Impostor.Metrics.Metrics
             this._gameOverImpostorKill.Set(this.GameOverByImpostorKill);
             this._gameOverImpostorSabotage.Set(this.GameOverByImpostorSabotage);
             this._gameOverImpostorDisconnect.Set(this.GameOverByImpostorDisconnect);
+            this._gameOverCustom.Set(this.GameOverByCustom);
         }
     }
 }
