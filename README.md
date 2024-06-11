@@ -1,5 +1,9 @@
 # Impostor.Metrics
 
+> [!IMPORTANT]
+> This plugin is no longer supported. We highly recommend switching to [Boot.Metrics](https://github.com/miniduikboot/Boot.Metrics)
+
+
 This plugin exports data to Prometheus. A Grafana dashboard is included.
 
 
